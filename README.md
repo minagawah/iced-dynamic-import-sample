@@ -353,8 +353,8 @@ Why am I passing an argument?
 
 
 Well, this is about directories.  
-If I were serving my assets from site's directory root,
-I would not need any arguments:
+If I were serving my assets from site's directory root, I would not need any arguments.  
+Like this:
 ```js
 init()
 ```
