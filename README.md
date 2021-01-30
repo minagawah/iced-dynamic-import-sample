@@ -370,7 +370,7 @@ Currently, I have this:
   },
 ```
 
-Means, I am serving the JS assets from: http://tokyo800.jp/mina/echo-bot/assets  
+Meaning, I am serving the JS assets from: http://tokyo800.jp/mina/echo-bot/assets  
 Say, if I had `/assets`, it means totally different.  
 If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would look like this:
 
@@ -381,6 +381,12 @@ If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would lo
 and it is certainly not what I want (will result in 404).  
 So, you need to make sure `publicPath` to have a _relative path_.  
 In my case, I must avoid `/assets`, but need `assets` instead.
+
+Also, for those of you don't know, Webpack5 was released on Jan. 12, 2021,
+and it no longer supports `process.env`,
+and you need to manually define envs like `NODE_ENV` yourself in Webpack config.
+
+
 
 #### [Step 5] Creating a Symlink
 
