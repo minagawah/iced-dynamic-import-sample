@@ -1,8 +1,8 @@
 {
   "name": "iced-dynamic-import-sample",
   "version": "0.1.0",
-  "private": true,
-  "description": "Importing iced_web from JS dynamically.",
+  "private": false,
+  "description": "Importing 'iced_web' (Rust GUI framework) from JS dynamically.",
   "main": "public/index.html",
   "scripts": {
     "pretty": "$npm_execpath pretty-quick",
@@ -14,9 +14,12 @@
   },
   "repository": "https://github.com/minagawah/iced-dynamic-import-sample.git",
   "keywords": [
+    "WASM",
+    "Rust",
     "Iced",
     "WebGPU",
-    "wasm-bindgen"
+    "wasm-bindgen",
+    "Dynamic Import"
   ],
   "author": "Hiroki Minagawa <minagawa@tokyo800.jp>",
   "license": "(Unlicense OR MIT)",
