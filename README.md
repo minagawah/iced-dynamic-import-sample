@@ -368,7 +368,7 @@ Instead, I want this:
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
 When pass is not given, it will fetch for: `/echo-bot/echo-bot_bg.wasm`  
-This is not even in `/mina/iced-dynamics` directory where I have all the JS and WASM assets!  
+This is not even in `/mina/iced-dynamics` where I serve my assets!  
 So, the point is, when a path is not given, it will fetch for the _ABSOLUTE PATH_ as a default.  
 To avoid this, I must explicity pass a _RELATIVE PATH_ which is `wasm/echo-bot/echo-bot_bg.wasm`
 
@@ -388,7 +388,7 @@ Currently, I have this:
 
 Meaning, I am serving the JS assets from: http://tokyo800.jp/mina/iced-dynamic/assets  
 What if, instead of `assets`, I had `/assets`?  
-Well, that would be disasterous...  
+Well... That would be disasterous...  
 When my HTML page is generated, it will look like this:
 
 ```html
