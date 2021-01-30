@@ -112,9 +112,9 @@ Also, version for your globally installed `wasm-bidgen` must exact match the one
 
 ### Dev
 
-**IMPORTANT:**
-
 ```
+### IMPORTANT
+
 After you clone the repo, make sure that you:
 
 1. Build the WASM app
@@ -128,10 +128,10 @@ cd public/wasm/echo-bot
 yarn link
 cd ../../../src
 yarn link "echo-bot"
-```
 
-Further details about making a symlink is described in
-[_4. What I Did - [Step 5] Creating a Symlink_](#-step-5--creating-a-symlink).
+Further details described in:
+# 4. What I Did - [Step 5] Creating a Symlink
+```
 
 Once you have the WASM built and the symlink, then you are all set for development.  
 Here is a possible scenario:
