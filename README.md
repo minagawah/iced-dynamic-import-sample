@@ -362,7 +362,7 @@ init()
 However, I am serving all the assets from the following subdirectory:  
 http://tokyo800.jp/mina/iced-dynamic/
 
-Let's say we would not specify the path to `init()`, then it would fetch the following (which does not exist):  
+Let's say we feed nothing for `init`, then it would fetch following (which results in 404):  
 http://tokyo800.jp/echo-bot/echo-bot_bg.wasm  
 Instead, I want this:  
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
