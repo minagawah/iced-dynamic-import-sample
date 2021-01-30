@@ -231,12 +231,12 @@ yarn add --dev tailwindcss http-server
 
 ## 4. What I Did
 
-While `wasm-bindgen` will generate a WASM package
-(for JS to asynchronously load them),
-if you want to dynamically load the package from JS
-instead of load it from HTML on the fly,
-you need special preparations.  
-I will describe the steps in details:
+Instead of import WASM modules inline (popular way of import),
+if you want to load them from your JS programs,
+you need some special preparations.
+
+I will describe the steps in detail:
+
 
 #### [Step 1] Source Directory for WASM
 
