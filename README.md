@@ -349,29 +349,27 @@ init(WASM_PATH).catch(err => {
 ```
 
 Notice the above is not very straight foward...  
-Why am I passing an argument?  
-Well, it has to do with where WASM files are being served.
+Why am I passing an argument?
 
-If I served JS and WASM assets from site's directory root,
-then I wouldn't need any arguments at all:  
 
+Well, this is about directories.  
+If I were serving my assets from site's directory root,
+I would not need any arguments:
 ```js
 init()
 ```
 
-However, I am serving my WASM from a subdirectory:  
-http://tokyo800.jp/mina/iced-dynanamic  /
+However, I am serving all the assets from the following subdirectory:  
+http://tokyo800.jp/mina/iced-dynamic/
 
-Without specifying the path, it would fetch the following (which doesn't exist):  
+Let's say we would not specify the path to `init()`, then it would fetch the following (which does not exist):  
 http://tokyo800.jp/echo-bot/echo-bot_bg.wasm  
 Instead, I want this:  
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
-WHen pass is not given, it will fetch for the absolute path,
-which is `/echo-bot/echo-bot_bg.wasm`,
-and it is not even in `/mina/iced-dynamics` directory
-where I have all the JS and WASM assets.
-So, I need to explicitly feed `init()` with a relative path: `wasm/echo-bot/echo-bot_bg.wasm`
+When pass is not given, it will fetch for the _absolute path_ which is `/echo-bot/echo-bot_bg.wasm`.  
+This is not even within `/mina/iced-dynamics` where I have the assets!  
+So, I need to explicity specify a _relative path_ which is  `wasm/echo-bot/echo-bot_bg.wasm`
 
 &nbsp;
 
