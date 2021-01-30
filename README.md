@@ -388,17 +388,17 @@ Currently, I have this:
 
 Meaning, I am serving the JS assets from: http://tokyo800.jp/mina/iced-dynamic/assets  
 What if, instead of `assets`, I had `/assets`?  
-Well, that would be disasterous...
+Well, that would be disasterous...  
 When my HTML page is generated, it will look like this:
 
 ```html
 <script src="/assets/app.a9b38752ab1a9b8d4ae9.js">
 ```
 
-As you can see, it will result in getting 404...
+As you can see, it will result in 404...
 
-So, if you have your assets in a subdirectory,
-make sure to set a _relative path_ to `publicPath`.
+So, if you had your assets in a subdirectory,
+make sure you have a _RELATIVE PATH_ for `publicPath`.
 
 &dash;&dash;
 
