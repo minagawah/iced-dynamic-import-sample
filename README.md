@@ -105,7 +105,7 @@ We are using `toml-cli` and `tr` in `build.sh` to extract the current Cargo pack
 - tr
 
 ```
-cargo install toml-cli || true
+cargo install toml-cli
 ```
 
 Also, version for your globally installed `wasm-bidgen` must exact match the one defined in `Cargo.toml`.
@@ -224,14 +224,14 @@ yarn add --dev prettier pretty-quick
 - http-server
 
 ```
-yarn add --dev tailwindcss http-server
+yarn add --dev http-server
 ```
 
 &nbsp;
 
 ## 4. What I Did
 
-Instead of import WASM modules inline (popular way of import),
+Instead of importing WASM modules inline (popular way of import),
 if you want to load them from your JS programs, you need some special preparations.
 I will describe the steps in detail:
 
