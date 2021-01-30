@@ -352,7 +352,7 @@ Notice the above is not very straight foward...
 Why am I passing an argument?
 
 
-Well, this is about _directory_.  
+Well, this is about a _directory_ you serve assets from.  
 If I were serving my assets from site's directory root, I would not need any arguments.  
 Like this:
 ```js
