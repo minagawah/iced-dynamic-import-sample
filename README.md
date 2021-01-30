@@ -232,9 +232,7 @@ yarn add --dev tailwindcss http-server
 ## 4. What I Did
 
 Instead of import WASM modules inline (popular way of import),
-if you want to load them from your JS programs,
-you need some special preparations.
-
+if you want to load them from your JS programs, you need some special preparations.
 I will describe the steps in detail:
 
 
