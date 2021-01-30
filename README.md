@@ -348,21 +348,22 @@ init(WASM_PATH).catch(err => {
 });
 ```
 
-Notice I am doing something weird.
-This is because I serve WASM files _NOT_ directly from the site's document root,
-(in my case, it is http://tokyo800.jp/)
-but from a subdirectory (which is http://tokyo800.jp/mina/iced_dynanamic).
-If I were not serving it from subdirectory,
-I do not need to pass any arguments to `init()`, and it works.
-Without specifying the path for the WASM file,
-I would end up fetching it as an _absolute path_
-(which, in my case, would be
-http://tokyo800.jp/echo-bot/echo-bot_bg.wasm and it will result in 404).
-I looked for ways to fetch the _relative path_ for the WASM file,
-but I found out that specifying the path is the only way.
+Notice that I am doing something very weird...
 
-Also, I must watch out for `publicPath` in Webpack config.
-I currently have this:
+This is because I serve WASM files not directly from the site's document root
+(in my case, it is http://tokyo800.jp/),
+but from a subdirectory (which is http://tokyo800.jp/mina/iced_dynanamic).
+
+I do not need to pass any arguments to `init` if I were serving from the document root.
+However, I am serving it from subdirectory.
+Without specifying the path, it would end up fetching the _absolute path_
+(which is
+http://tokyo800.jp/echo-bot/echo-bot_bg.wasm
+and would result in 404).
+I looked for ways to fetch the _relative path_, but I found specifying the path is the only way...
+
+Also, I must watch out for `publicPath` in Webpack config.  
+Currently, I have this:
 
 ```js
   output: {
@@ -372,19 +373,17 @@ I currently have this:
   },
 ```
 
-Means, I am serving the JS assets from: http://tokyo800.jp/mina/echo-bot/assets
-If I had `/assets` for this, it means a whole lot.
-When `html-webpack-plugin` emits the paths for JS assets in `index.html`,
-it would become like this:
+Means, I am serving the JS assets from: http://tokyo800.jp/mina/echo-bot/assets  
+Say, if I had `/assets`, it means totally different.  
+If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would look like this:
 
 ```html
 <script src="/assets/app.a9b38752ab1a9b8d4ae9.js">
 ```
 
-which will results in 404.
-With this, not only would you fail in fetching WASM files,
-but for JS assets as well.
-So, you want to specify `assets` instead of `/assets` for `publicPath`.
+and it is certainly not what I want (will result in 404).  
+So, you need to make sure `publicPath` to have a _relative path_.  
+In my case, I must avoid `/assets`, but need `assets` instead.
 
 #### [Step 5] Creating a Symlink
 
