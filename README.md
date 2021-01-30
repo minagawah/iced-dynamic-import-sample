@@ -355,10 +355,8 @@ This is because I serve WASM files not directly from the site's document root
 but from a subdirectory (which is http://tokyo800.jp/mina/iced_dynanamic).  
 If I were serving from the document root, I do not need to pass any arguments to `init`.
 But, again, I am serving it from subdirectory...  
-Without specifying the path, it would end up fetching the _absolute path_
-(which would be
-http://tokyo800.jp/echo-bot/echo-bot_bg.wasm
-and will result in 404).
+Without specifying the path, it would end up fetching the _absolute path_.  
+(which would be http://tokyo800.jp/echo-bot/echo-bot_bg.wasm and will result in 404)  
 I looked for ways to fetch the _relative path_, but I found specifying the path is the only way...
 
 Also, I must watch out for `publicPath` in Webpack config.  
