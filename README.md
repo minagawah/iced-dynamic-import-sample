@@ -368,11 +368,11 @@ Instead, I want this:
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
 When pass is not given, it will fetch for: `/echo-bot/echo-bot_bg.wasm`  
-This is not even in `/mina/iced-dynamics` directory where I have all the JS and WASM assets!!  
-So, the point is, when path is not given it fetches for the _absolute path_ as a default.  
-To avoid this, I must explicity give a _relative path_ which is `wasm/echo-bot/echo-bot_bg.wasm`
+This is not even in `/mina/iced-dynamics` directory where I have all the JS and WASM assets!  
+So, the point is, when a path is not given, it will fetch for the _ABSOLUTE PATH_ as a default.  
+To avoid this, I must explicity pass a _RELATIVE PATH_ which is `wasm/echo-bot/echo-bot_bg.wasm`
 
-Also, I must watch out for `publicPath` in Webpack config.  
+Also, I need to be careful with what to set for `publicPath` in Webpack config.  
 Currently, I have this:
 
 ```js
