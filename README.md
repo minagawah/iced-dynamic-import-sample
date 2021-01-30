@@ -11,13 +11,21 @@ Importing iced_web from JS dynamically.
 &nbsp; &nbsp; [3-4. Other Build Tools](#3-4-other-build-tools)  
 &nbsp; &nbsp; [3-5. Other Dependencies](#3-5-other-dependencies)  
 [4. What I Did](#4-what-i-did)  
+&nbsp; &nbsp; [[Step 1] Source Directory for WASM](#step-1-source-directory-for-wasm)  
+&nbsp; &nbsp; [[Step 2] Build Directory for WASM](#step-2-build-directory-for-wasm)  
+&nbsp; &nbsp; [[Step 3] Writing `build.sh`](#step-3-writing-buildsh)  
+&nbsp; &nbsp; [[Step 4] Subdirectory](#step-4-subdirectory)  
+&nbsp; &nbsp; [[Step 5] Creating a Symlink](#step-5-creating-a-symlink)  
+&nbsp; &nbsp; [[Step 6] `wasm-loader`](#step-6-wasm-loader)  
+&nbsp; &nbsp; [[Step 7] `import.meta` (or `file://`)](#step-7-importmeta-or-file)  
+&nbsp; &nbsp; [[Step 8] `application/wasm`](#step-8-applicationwasm)  
 [5. Notes](#5-notes)  
 &nbsp; &nbsp; [5-1. Issue: No `canvas` in the root](#5-1-issue-no-canvas-in-the-root)  
 [6. LICENSE](#6-license)
 
 ![screenshot](screenshot.png)
 
-[View Demo](http://tokyo800.jp/mina/iced-dynamic-import-sample/)
+[View Demo](http://tokyo800.jp/mina/iced-dynamic/)
 
 ## 1. About
 
@@ -104,13 +112,14 @@ Also, version for your globally installed `wasm-bidgen` must exact match the one
 
 ### Dev
 
-**IMPORTANT:**  
+**IMPORTANT:**
+
+```
 After you clone the repo, make sure that you:
 
 1. Build the WASM app
 2. Make a symlink
 
-```
 git clone https://github.com/minagawah/iced-dynamic-import-sample.git
 cd iced-dynamic-import-sample
 yarn build:wasm
@@ -121,11 +130,10 @@ cd ../../../src
 yarn link "echo-bot"
 ```
 
-details described in [_4. What I Did - [Step 5] Creating a Symlink_](#-step-5--creating-a-symlink).
+Further details about making a symlink is described in
+[_4. What I Did - [Step 5] Creating a Symlink_](#-step-5--creating-a-symlink).
 
-Once you have the WASM built and the symlink,
-then you are all set for development.
-
+Once you have the WASM built and the symlink, then you are all set for development.  
 Here is a possible scenario:
 
 ```
@@ -137,6 +145,8 @@ yarn start
 ```
 
 ### Prod
+
+This will build for both JS and WASM:
 
 ```
 yarn build
@@ -225,8 +235,8 @@ While `wasm-bindgen` will generate a WASM package
 (for JS to asynchronously load them),
 if you want to dynamically load the package from JS
 instead of load it from HTML on the fly,
-you need special preparations.
-Here, I will describe the steps in details:
+you need special preparations.  
+I will describe the steps in details:
 
 #### [Step 1] Source Directory for WASM
 
