@@ -368,7 +368,7 @@ Instead, I want this:
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
 When pass is not given, it will fetch for: `/echo-bot/echo-bot_bg.wasm`  
-This is not even close to `/mina/iced-dynamics` where I have my assets!!!!!!  
+This is not even close to `/mina/iced-dynamics` where I have my assets!!!!  
 So, the point is, when a path is not given, it will fetch for the _ABSOLUTE PATH_ as a default.  
 To avoid this, I must explicity pass a _RELATIVE PATH_ which is `wasm/echo-bot/echo-bot_bg.wasm`
 
