@@ -350,18 +350,21 @@ init(WASM_PATH).catch(err => {
 
 Notice the above is not very straight foward...  
 Why am I passing an argument?  
-Well, it has to do with: _Where am I serving WASM files from_
+Well, it has to do with where WASM files are being served.
 
-If I were serving them from site's directory root, then I wouldn't need an argument at all:  
+If I served JS and WASM assets from site's directory root,
+then I wouldn't need any arguments at all:  
+
 ```js
 init()
 ```
+
 However, I am serving my WASM from a subdirectory:  
 http://tokyo800.jp/mina/iced-dynanamic  /
 
-Without specifying the path, it would fetch the following:  
+Without specifying the path, it would fetch the following (which doesn't exist):  
 http://tokyo800.jp/echo-bot/echo-bot_bg.wasm  
-which does not exist. Instead, I want this:  
+Instead, I want this:  
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
 WHen pass is not given, it will fetch for the absolute path,
