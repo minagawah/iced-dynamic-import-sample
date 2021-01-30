@@ -348,16 +348,29 @@ init(WASM_PATH).catch(err => {
 });
 ```
 
-Notice that I am doing something very weird...
+Notice the above is not very straight foward...  
+Why am I passing an argument?  
+Well, it has to do with: _Where am I serving WASM files from_
 
-This is because I serve WASM files not directly from the site's document root
-(in my case, it is http://tokyo800.jp/),
-but from a subdirectory (which is http://tokyo800.jp/mina/iced_dynanamic).  
-If I were serving from the document root, I do not need to pass any arguments to `init`.
-But, again, I am serving it from subdirectory...  
-Without specifying the path, it would end up fetching the _absolute path_.  
-(which would be http://tokyo800.jp/echo-bot/echo-bot_bg.wasm and will result in 404)  
-I looked for ways to fetch the _relative path_, but I found specifying the path is the only way...
+If I were serving them from site's directory root, then I wouldn't need an argument at all:  
+```js
+init()
+```
+However, I am serving my WASM from a subdirectory:  
+http://tokyo800.jp/mina/iced-dynanamic  /
+
+Without specifying the path, it would fetch the following:  
+http://tokyo800.jp/echo-bot/echo-bot_bg.wasm  
+which does not exist. Instead, I want this:  
+http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
+
+WHen pass is not given, it will fetch for the absolute path,
+which is `/echo-bot/echo-bot_bg.wasm`,
+and it is not even in `/mina/iced-dynamics` directory
+where I have all the JS and WASM assets.
+So, I need to explicitly feed `init()` with a relative path: `wasm/echo-bot/echo-bot_bg.wasm`
+
+&nbsp;
 
 Also, I must watch out for `publicPath` in Webpack config.  
 Currently, I have this:
@@ -370,7 +383,7 @@ Currently, I have this:
   },
 ```
 
-Meaning, I am serving the JS assets from: http://tokyo800.jp/mina/echo-bot/assets  
+Meaning, I am serving the JS assets from: view-source:http://tokyo800.jp/mina/iced-dynamic/assets
 Say, if I had `/assets`, it means totally different.  
 If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would look like this:
 
@@ -382,10 +395,13 @@ and it is certainly not what I want (will result in 404).
 So, you need to make sure `publicPath` to have a _relative path_.  
 In my case, I must avoid `/assets`, but need `assets` instead.
 
+&nbsp;
+
 Also, for those of you don't know, Webpack5 was released on Jan. 12, 2021,
 and it no longer supports `process.env`,
 and you need to manually define envs like `NODE_ENV` yourself in Webpack config.
 
+&nbsp;
 
 
 #### [Step 5] Creating a Symlink
@@ -531,7 +547,7 @@ error[E0432]: unresolved import `iced::canvas`
   |     ^^^^^^ no `canvas` in the root
 ```
 
-I _sort of found_ [a solution](https://github.com/gfx-rs/wgpu-rs/issues/227#issuecomment-607613021).
+I sort of found [a solution](https://github.com/gfx-rs/wgpu-rs/issues/227#issuecomment-607613021).
 
 ```
 cargo update -p gfx-backend-vulkan
