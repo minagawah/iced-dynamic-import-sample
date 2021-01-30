@@ -14,7 +14,7 @@ Importing `iced_web` (Rust GUI framework) from JS dynamically.
 &nbsp; &nbsp; [[Step 1] Source Directory for WASM](#step-1-source-directory-for-wasm)  
 &nbsp; &nbsp; [[Step 2] Build Directory for WASM](#step-2-build-directory-for-wasm)  
 &nbsp; &nbsp; [[Step 3] Writing `build.sh`](#step-3-writing-buildsh)  
-&nbsp; &nbsp; [[Step 4] Subdirectory](#step-4-subdirectory)  
+&nbsp; &nbsp; [[Step 4] Subdirectory Issue](#step-4-subdirectory-issue)  
 &nbsp; &nbsp; [[Step 5] Creating a Symlink](#step-5-creating-a-symlink)  
 &nbsp; &nbsp; [[Step 6] `wasm-loader`](#step-6-wasm-loader)  
 &nbsp; &nbsp; [[Step 7] `import.meta` (or `file://`)](#step-7-importmeta-or-file)  
@@ -331,7 +331,7 @@ snippets
 }
 ```
 
-#### [Step 4] Subdirectory
+#### [Step 4] Subdirectory Issue
 
 From JS, we want this:
 
@@ -560,6 +560,9 @@ cargo update -p gfx-backend-vulkan
 
 Well, it did compile successfully when the target was not for `wasm32-unknown-unknown`,
 but for `wasm32-unknown-unknown`, I still get the error...
+
+Maybe [this](https://github.com/gfx-rs/wgpu-rs/wiki/Running-on-the-Web-with-WebGPU-and-WebGL) would help, but I am not sure...
+
 
 &nbsp;
 
