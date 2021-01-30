@@ -367,11 +367,10 @@ http://tokyo800.jp/echo-bot/echo-bot_bg.wasm
 Instead, I want this:  
 http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
 
-When pass is not given, it will fetch for the _absolute path_ which is `/echo-bot/echo-bot_bg.wasm`.  
-This is not even within `/mina/iced-dynamics` where I have the assets!  
-So, I need to explicity specify a _relative path_ which is  `wasm/echo-bot/echo-bot_bg.wasm`
-
-&nbsp;
+When pass is not given, it will fetch for: `/echo-bot/echo-bot_bg.wasm`  
+This is not even in `/mina/iced-dynamics` directory where I have all the JS and WASM assets!!  
+So, the point is, when path is not given it fetches for the _absolute path_ as a default.  
+To avoid this, I must explicity give a _relative path_ which is `wasm/echo-bot/echo-bot_bg.wasm`
 
 Also, I must watch out for `publicPath` in Webpack config.  
 Currently, I have this:
@@ -395,8 +394,6 @@ If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would lo
 and it is certainly not what I want (will result in 404).  
 So, you need to make sure `publicPath` to have a _relative path_.  
 In my case, I must avoid `/assets`, but need `assets` instead.
-
-&nbsp;
 
 Also, for those of you don't know, Webpack5 was released on Jan. 12, 2021,
 and it no longer supports `process.env`,
