@@ -372,7 +372,10 @@ This is not even in `/mina/iced-dynamics` directory where I have all the JS and 
 So, the point is, when a path is not given, it will fetch for the _ABSOLUTE PATH_ as a default.  
 To avoid this, I must explicity pass a _RELATIVE PATH_ which is `wasm/echo-bot/echo-bot_bg.wasm`
 
-Also, I need to be careful with what to set for `publicPath` in Webpack config.  
+&dash;&dash;
+
+Also, I need to be careful with what to set for `publicPath` in Webpack config.
+
 Currently, I have this:
 
 ```js
@@ -383,17 +386,21 @@ Currently, I have this:
   },
 ```
 
-Meaning, I am serving the JS assets from: view-source:http://tokyo800.jp/mina/iced-dynamic/assets
-Say, if I had `/assets`, it means totally different.  
-If I had `/assets`, when `html-webpack-plugin` emit the asset paths, it would look like this:
+Meaning, I am serving the JS assets from: http://tokyo800.jp/mina/iced-dynamic/assets  
+What if, instead of `assets`, I had `/assets`?  
+Well, that would be disasterous...
+When my HTML page is generated, it will look like this:
 
 ```html
 <script src="/assets/app.a9b38752ab1a9b8d4ae9.js">
 ```
 
-and it is certainly not what I want (will result in 404).  
-So, you need to make sure `publicPath` to have a _relative path_.  
-In my case, I must avoid `/assets`, but need `assets` instead.
+As you can see, it will result in getting 404...
+
+So, if you have your assets in a subdirectory,
+make sure to set a _relative path_ to `publicPath`.
+
+&dash;&dash;
 
 Also, for those of you don't know, Webpack5 was released on Jan. 12, 2021,
 and it no longer supports `process.env`,
