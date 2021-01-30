@@ -1,6 +1,6 @@
 # iced-dynamic-import-sample
 
-Importing iced_web from JS dynamically.
+Importing `iced_web` (Rust GUI framework) from JS dynamically.
 
 [1. About](#1-about)  
 [2. Dev + Build](#2-dev--build)  
