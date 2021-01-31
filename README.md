@@ -235,7 +235,6 @@ Instead of importing WASM modules inline (popular way of import),
 if you want to load them from your JS programs, you need some special preparations.
 I will describe the steps in detail:
 
-
 #### [Step 1] Source Directory for WASM
 
 Creating source directory for Rust: `src_for_wasm/echo-bot`
@@ -341,7 +340,7 @@ import init from 'echo-bot';
 const WASM_PATH =
   NODE_ENV && NODE_ENV === 'production'
     ? 'wasm/echo-bot/echo-bot_bg.wasm'
-    : null;
+    : void 0; // undefined
 
 init(WASM_PATH).catch(err => {
   console.warn(err);
@@ -351,12 +350,12 @@ init(WASM_PATH).catch(err => {
 Notice the above is not very straight foward...  
 Why am I passing an argument?
 
-
 Well, this is about a _directory_ you serve assets from.  
 If I were serving my assets from site's directory root, I would not need any arguments.  
 Like this:
+
 ```js
-init()
+init();
 ```
 
 However, I am serving all the assets from the following subdirectory:  
@@ -365,7 +364,7 @@ http://tokyo800.jp/mina/iced-dynamic/
 Let's say we feed nothing for `init`, then it would fetch following (which results in 404):  
 http://tokyo800.jp/echo-bot/echo-bot_bg.wasm  
 Instead, I want this:  
-http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm  
+http://tokyo800.jp/mina/iced-dynamic/wasm/echo-bot/echo-bot_bg.wasm
 
 When pass is not given, it will fetch for: `/echo-bot/echo-bot_bg.wasm`  
 This is not even close to `/mina/iced-dynamics` where I have my assets!!!!  
@@ -402,12 +401,32 @@ make sure you have a _RELATIVE PATH_ for `publicPath`.
 
 &dash;&dash;
 
+Notice, also, that I am explicitly specifying
+`void 0` (which is another way of saying `undefined`)
+when we are not passing a path to the WASM file.
+This does not usually become an issue,
+but it may sometimes become a cause of raising
+a runtime error especially when we are using
+canvas related features.
+
+We need to explicitly pass `undefined`
+because a predicate defined in `init`
+strictly checks against `undefined`.
+Otherwise, when initializing the WASM app, in:
+
+```js
+WebAssembly.instantiate(bytes, imports);
+```
+
+the first argument becomes empty.
+
+&dash;&dash;
+
 Also, for those of you don't know, Webpack5 was released on Jan. 12, 2021,
 and it no longer supports `process.env`,
 and you need to manually define envs like `NODE_ENV` yourself in Webpack config.
 
 &nbsp;
-
 
 #### [Step 5] Creating a Symlink
 
@@ -562,7 +581,6 @@ Well, it did compile successfully when the target was not for `wasm32-unknown-un
 but for `wasm32-unknown-unknown`, I still get the error...
 
 Maybe [this](https://github.com/gfx-rs/wgpu-rs/wiki/Running-on-the-Web-with-WebGPU-and-WebGL) would help, but I am not sure...
-
 
 &nbsp;
 
