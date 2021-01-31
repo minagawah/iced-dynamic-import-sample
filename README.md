@@ -35,7 +35,12 @@ Importing `iced_web` (Rust GUI framework) from JS dynamically.
 - Configurations for serving WASM files from a subdirectory.
 
 If you are planning to use `wasm-pack` instead of `wasm-bindgen`,
-I have [another sample repo](https://github.com/minagawah/rust-perlin-wasm-test-2), and you want to take a look.
+I have another sample as
+[wasm-pack-canvas-example](https://github.com/minagawah/wasm-pack-canvas-example),
+and it has almost the same directory structure except it uses `wasm-pack` for builds.  
+Or, there is
+[another sample repo](https://github.com/minagawah/rust-perlin-wasm-test-2)
+which is quite old, but it maybe worth to you.
 
 Maybe it is worth showing you the directory structure:
 
